@@ -15,7 +15,7 @@ public class Produto {
     private int largura;
     private String composicao;
     private String cor;
-    private StatusEnum status;
+    private String estado;
 
     public Long getId() {
         return id;
@@ -73,11 +73,11 @@ public class Produto {
         this.cor = cor;
     }
 
-    public StatusEnum getStatus() {
-        return status;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setStatus(StatusEnum status) {
-        this.status = status;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

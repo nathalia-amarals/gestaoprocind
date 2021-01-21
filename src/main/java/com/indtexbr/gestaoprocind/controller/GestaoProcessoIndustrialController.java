@@ -11,7 +11,7 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("gestaoprocind")
+@RequestMapping("/gestaoprocind")
 public class GestaoProcessoIndustrialController {
 
     @Autowired
@@ -27,6 +27,49 @@ public class GestaoProcessoIndustrialController {
 
     @PostMapping
     public ResponseEntity<Produto> criaProduto(@RequestBody Produto produto){
-        return new ResponseEntity<Produto>(produtoRepository.save(produto), HttpStatus.CREATED);
+        Produto cadastrado = produtoRepository.save(produto);
+        return new ResponseEntity<Produto>(cadastrado, HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity atualizaProduto(@RequestBody Produto produto){
+        Optional<Produto> produtoCadastrado = produtoRepository.findById(produto.getId());
+        if(!produtoCadastrado.isEmpty()){
+            if(produto.getNome().equals("")){
+                produto.setNome(produtoCadastrado.get().getNome());
+            }
+            if(produto.getReferencia().equals("")){
+                produto.setReferencia(produtoCadastrado.get().getReferencia());
+            }
+            if(produto.getAltura() == 0){
+                produto.setAltura(produtoCadastrado.get().getAltura());
+            }
+            if(produto.getLargura() == 0){
+                produto.setLargura(produtoCadastrado.get().getLargura());
+            }
+            if(produto.getComposicao().equals("")){
+                produto.setComposicao(produtoCadastrado.get().getComposicao());
+            }
+            if(produto.getCor() != null){
+                produto.setCor(produtoCadastrado.get().getCor());
+            }
+            if(produto.getEstado().equals("")){
+                produto.setEstado(produtoCadastrado.get().getEstado());
+            }
+            produtoRepository.save(produto);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deletaProduto(@PathVariable("id") Long id){
+        Optional<Produto> produtoCadastrado = produtoRepository.findById(id);
+        if(!produtoCadastrado.isEmpty())
+        {
+            produtoRepository.deleteById(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }
