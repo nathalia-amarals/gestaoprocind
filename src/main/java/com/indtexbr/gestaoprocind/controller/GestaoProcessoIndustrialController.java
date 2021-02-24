@@ -50,7 +50,7 @@ public class GestaoProcessoIndustrialController {
             if(produto.getComposicao().equals("")){
                 produto.setComposicao(produtoCadastrado.get().getComposicao());
             }
-            if(produto.getCor() != null){
+            if(produto.getCor().equals("")){
                 produto.setCor(produtoCadastrado.get().getCor());
             }
             if(produto.getEstado().equals("")){
