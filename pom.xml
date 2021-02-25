@@ -10,12 +10,13 @@
 	</parent>
 	<groupId>com.indtexbr</groupId>
 	<artifactId>gestaoprocind</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>gestaoprocind</name>
 	<description>Gestão de Processo Industrial</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -39,9 +40,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>gestaoprocind</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
