@@ -1,6 +1,6 @@
 version: "3"
 services: 
-  consultaassesso:
+  gestaoprocind:
     build: ./
     environment: 
       - SPRING_DATA_MONGODB_URI=mongodb://db:27017/gestprocind
